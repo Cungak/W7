@@ -1,0 +1,33 @@
+;w7 appending
+
+Section .data
+quotes2 DB 'Better three hours too soon than a minute too late.No legacy is so >
+filename DB 'quotes.txt',0h
+
+Section .text
+global _start
+
+_start:
+
+Mov eax, 19
+Mov ebx, filename
+Mov edx,2
+Int 0x80
+
+mov eax, 4
+
+       mov ebx, [fd_out]   ;file descriptor
+       mov ecx, quotes2
+       mov edx, 84
+     int 0x80
+
+Mov eax,6
+Mov ebx, [fd_out]
+Int 0x80
+
+Mov eax,1
+Int 0x80
+
+section .bss
+
+       fd_out resb 1
