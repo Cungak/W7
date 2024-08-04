@@ -1,0 +1,33 @@
+;w7 activity
+
+Section .data
+filename DB 'quotes.txt',0h
+quotes DB 'To be, or not to be, that is the question. A fool thinks himself to >
+
+Section .text 
+global _start
+
+_start:
+
+Mov eax,5
+Mov ebx, filename
+mov Ecx,1
+Mov edx, 077o
+Int 0x80
+
+Mov [fd_out], eax
+Mov eax,4
+Mov ebx,[fd_out]
+Mov Ecx, quotes
+Mov edx,119
+Int 0x80
+
+Mov eax,6
+Mov ebx,[fd_out]
+Int 0x80
+
+Mov eax,1
+Int 0x80
+
+Section .bss
+fd_out resb 1
