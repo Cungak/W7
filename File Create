@@ -1,0 +1,17 @@
+                             
+Section .text
+global _start
+
+_start:
+
+Mov ecx, 0711o
+Mov ebx, filename
+Mov eax, 8
+Int 0x80
+Mov eax,1
+Int 0x80
+
+Section .data
+filename  DB 'quotes.txt',0h
+
+
